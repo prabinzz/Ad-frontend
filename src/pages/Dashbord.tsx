@@ -11,7 +11,7 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState("index");
   return (
     <div className="w-full flex justify-between">
-      <div className="w-20 bg-red-50"></div>
+      <div className="w-20 bg-red-50">Dashboard route</div>
       <div className="w-full bg-slate-500"></div>
     </div>
   );

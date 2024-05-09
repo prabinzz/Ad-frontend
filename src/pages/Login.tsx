@@ -1,12 +1,28 @@
+import { Axios } from "@/lib/axios";
+import { login } from "@/store/authSlice";
+import store from "@/store/store";
 import React, { useState } from "react";
+import { useNavigation, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const { token } = store.getState().auth;
 
-  const handleLogin = () => {
-    // Logic to handle login
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = await Axios.post("/auth/Login", {
+      email: email,
+      password: password,
+    });
+    const token = data.data.token;
+    if (data.status == 200) {
+      store.dispatch(login(token));
+      navigate("/");
+    }
+    console.log(data);
   };
 
   return (

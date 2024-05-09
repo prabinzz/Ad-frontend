@@ -1,15 +1,32 @@
+import { Axios } from "@/lib/axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigation = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [fullName, setFullName] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
-  const [gender, setGender] = useState<string>("");
-  const [dateOfBirth, setDateOfBirth] = useState<string>("");
-  const [role, setRole] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [role, setRole] = useState<string>("Blogger");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      // Handle password mismatch error
+      return;
+    }
+    const data = await Axios.post("/auth/Register", {
+      email: email,
+      name: fullName,
+      password: password,
+      confirmPassword: password,
+      role: role
+    });
+
+    if(data.status == 200){
+      navigation("/login");
+    }
     // Logic to handle form submission
   };
 
@@ -56,68 +73,41 @@ const Signup = () => {
               />
             </div>
             <div>
-              <label htmlFor="address" className="sr-only">
-                Address
+              <label htmlFor="password" className="sr-only">
+                Password
               </label>
               <input
-                id="address"
-                name="address"
-                type="text"
-                autoComplete="address"
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="gender" className="sr-only">
-                Gender
+              <label htmlFor="confirm-password" className="sr-only">
+                Confirm Password
               </label>
               <input
-                id="gender"
-                name="gender"
-                type="text"
-                autoComplete="gender"
+                id="confirm-password"
+                name="confirm-password"
+                type="password"
+                autoComplete="new-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Gender"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="dob" className="sr-only">
-                Date of Birth
-              </label>
-              <input
-                id="dob"
-                name="dob"
-                type="date"
-                autoComplete="bday"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Date of Birth"
-                value={dateOfBirth}
-                onChange={(e) => setDateOfBirth(e.target.value)}
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="role" className="sr-only">
                 Role
               </label>
-              <input
-                id="role"
-                name="role"
-                type="text"
-                autoComplete="role"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-              />
             </div>
           </div>
           <div>
