@@ -1,19 +1,35 @@
-import BlogCard from "@/component/DashboardBlog";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import AddBlogForm from "@/component/DashboardAddBlog";
+import BlogList from "@/component/DashboardBlogList";
+import NewAdminForm from "@/component/CreateAdmin";
+import EditBlog from "@/component/DashbordEditBlog";
+import { useParams } from "react-router-dom";
 
-const App = () => {
-  const [activeTab, setActiveTab] = useState("dashboard");
+const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState(useParams().tab || "Dashbord");
+
+  const tabs: { [key: string]: string } = {
+    dashboard: "Dashboard",
+    addblog: "AddBlog",
+    bloglist: "Blog List",
+    editblog: "Edit Blog",
+    addbdmin: "AddAdmin",
+    orders: "Orders",
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
       case "dashboard":
-        return <div>Tab 1</div>;
-      case "Blog":
-      // return <BlogCard onAdd={({}) => {}} editMode={false} onDelete={({})=> {}} onEdit={({})=> {}} onUpdate={({})=> {}} />;
-      case "products":
-        return <div>Tab 3</div>;
-      case "orders":
-        return <div>Tab 4</div>;
+        return <div>Dashboard Content</div>;
+      case "addblog":
+        return <AddBlogForm />;
+      case "bloglist":
+        return <BlogList />;
+      case "addadmin":
+        return <NewAdminForm />;
+      case "editblog":
+        return <EditBlog />;
       default:
         return null;
     }
@@ -22,48 +38,20 @@ const App = () => {
   return (
     <div className="flex h-screen">
       {/* Navbar */}
-      <nav className="bg-gray-800 w-1/4">
-        <ul className="py-4">
-          <li>
-            <button
-              className={`w-full px-4 py-2 text-white ${
-                activeTab === "dashboard" ? "bg-gray-900" : ""
-              }`}
-              onClick={() => setActiveTab("dashboard")}
-            >
-              Dashboard
-            </button>
-          </li>
-          <li>
-            <button
-              className={`w-full px-4 py-2 text-white ${
-                activeTab === "users" ? "bg-gray-900" : ""
-              }`}
-              onClick={() => setActiveTab("users")}
-            >
-              Users
-            </button>
-          </li>
-          <li>
-            <button
-              className={`w-full px-4 py-2 text-white ${
-                activeTab === "products" ? "bg-gray-900" : ""
-              }`}
-              onClick={() => setActiveTab("products")}
-            >
-              Products
-            </button>
-          </li>
-          <li>
-            <button
-              className={`w-full px-4 py-2 text-white ${
-                activeTab === "orders" ? "bg-gray-900" : ""
-              }`}
-              onClick={() => setActiveTab("orders")}
-            >
-              Orders
-            </button>
-          </li>
+      <nav className="bg-gray-800 w-1/4 py-4">
+        <ul>
+          {Object.entries(tabs).map(([key, value]) => (
+            <li key={key}>
+              <button
+                className={`w-full px-4 py-2 text-white ${
+                  activeTab === key ? "bg-gray-900" : ""
+                }`}
+                onClick={() => setActiveTab(key)}
+              >
+                {value}
+              </button>
+            </li>
+          ))}
         </ul>
       </nav>
 

@@ -14,9 +14,15 @@ const BlogCard = ({ blog }: props) => {
         <div className="col-span-8 flex gap-2 flex-col">
           <div className="flex gap-2 items-center">
             <img src="https://picsum.photos/25" className="rounded-full" />
-            <p className="text-muted">{blog.author} </p>
+            <p className="text-muted">{blog.author.name} </p>
             <p className="text-muted">In Dharan</p>
-            <p className="text-muted">{blog.created}</p>
+            <p className="text-muted">
+              {new Date(blog.created).toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
           </div>
           <h2 className="font-bold text-2xl">{blog.title}</h2>
           <p>

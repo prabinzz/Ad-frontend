@@ -21,8 +21,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog/" element={<BlogItem />} />
+          <Route path="/blog/:blogid" element={<BlogItem />} />
           <Route
-            path="/dashboard/"
+            path="/dashboard/:tab"
             element={
               <AdminRoute>
                 <Dashboard />

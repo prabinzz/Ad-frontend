@@ -18,8 +18,9 @@ const Login = () => {
       password: password,
     });
     const token = data.data.token;
+    const user = data.data.user as User;
     if (data.status == 200) {
-      store.dispatch(login(token));
+      store.dispatch(login({ token: token, user: user }));
       navigate("/");
     }
     console.log(data);

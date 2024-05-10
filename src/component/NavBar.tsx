@@ -8,6 +8,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { AiOutlineBell, AiOutlineSearch } from "react-icons/ai";
 import { TbBookmarkEdit } from "react-icons/tb";
+import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div className="flex justify-between items-center w-full px-12 py-2 border-b-[1px] shadow-sm">
@@ -21,9 +22,11 @@ const NavBar = () => {
       {/* End inputs bar*/}
 
       <div className="flex gap-8 items-center h-90">
-        <div className="flex gap-2">
-          <TbBookmarkEdit className="text-3xl" />
-          <p className="text-xl">Write</p>
+        <div>
+          <Link className="flex-gap-2" to="/dashboard/addblog">
+            <TbBookmarkEdit className="text-3xl" />
+            <p className="text-xl">Write</p>
+          </Link>
         </div>
         <div>
           <AiOutlineBell className="text-3xl" />
