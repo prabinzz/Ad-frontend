@@ -2,7 +2,7 @@ import { Axios } from "@/lib/axios";
 import { login } from "@/store/authSlice";
 import store from "@/store/store";
 import React, { useState } from "react";
-import { useNavigation, useNavigate } from "react-router-dom";
+import { useNavigation, useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -97,6 +97,10 @@ const Login = () => {
             </button>
           </div>
         </form>
+        <div className="text-center space-x-4">
+          <Link to="/signup">Go to signup</Link>
+          <Link to="/resetpassword">Forgot Password</Link>
+        </div>
       </div>
     </div>
   );

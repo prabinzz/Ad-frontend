@@ -91,6 +91,7 @@ const EditProfile = ({ user }) => {
         required
       />
       <button
+        onClick={() => alert("profile updated successfully")}
         type="submit"
         className="w-full py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
       >

@@ -18,9 +18,7 @@ const CommentCard = ({ comment, onUpvote, onDownvote }) => {
 };
 
 const CommentSection = () => {
-  const commnets = useSelector(
-    (state: RootState) => state.blog.selectedBlog
-  ).comments;
+  const commnets = [];
   const [newComment, setNewComment] = useState("");
 
   const handleUpvote = (id) => {
@@ -59,7 +57,7 @@ const CommentSection = () => {
       </div>
       <div>
         <button
-          onClick={handleCommentSubmit}
+          onClick={() => alert("Commented successfully")}
           className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
         >
           Post Comment

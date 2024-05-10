@@ -1,6 +1,6 @@
 import { Axios } from "@/lib/axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigation = useNavigate();
@@ -21,10 +21,10 @@ const Signup = () => {
       name: fullName,
       password: password,
       confirmPassword: password,
-      role: role
+      role: role,
     });
-
-    if(data.status == 200){
+    alert("Register successfull");
+    if (data.status == 200) {
       navigation("/login");
     }
     // Logic to handle form submission
@@ -119,6 +119,9 @@ const Signup = () => {
             </button>
           </div>
         </form>
+        <div>
+          <Link to={"/login"}>Login</Link>
+        </div>
       </div>
     </div>
   );

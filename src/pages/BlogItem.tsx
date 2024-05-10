@@ -29,8 +29,8 @@ const BlogItem = () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    alert("Successfully Upvoted.");
     if (res.status == 200) {
-      alert("Successfully Upvoted.");
     } else {
       alert("Couldnt Upvote.");
     }
@@ -75,7 +75,13 @@ const BlogItem = () => {
         <div className="my-2 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="bg-gray-100 rounded-md px-2">{blog?.tag}</div>
-            <div onClick={handleUpvote}>{blog?.upvoteCount} upvote</div>
+            <div
+              onClick={() => {
+                alert("successfull Upvoted");
+              }}
+            >
+              {blog?.upvoteCount} upvote
+            </div>
             <div onClick={handleDownvote}>{blog?.upvoteCount} downvote</div>
           </div>
           <div className="flex items-center gap-4">

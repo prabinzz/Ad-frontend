@@ -36,6 +36,29 @@ const AddBlogForm: React.FC = () => {
     setTags("");
   };
 
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await Axios.post("ImageUploadEndpoint", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      // if (res.status === 200) {
+      //   const responseData = await res.json();
+      //   if (responseData.imageUrl) {
+      //     setImageUrl(responseData.imageUrl); // Update the image URL state
+
+      // }
+    } catch (error) {
+      console.error("Failed to upload image:", error);
+    }
+  };
+
   return (
     <div className="mx-auto">
       <form
@@ -114,6 +137,21 @@ const AddBlogForm: React.FC = () => {
           </button>
         </div>
       </form>
+      <div className="mb-4">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="imageUpload"
+        >
+          Upload Image
+        </label>
+        <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="imageUpload"
+          type="file"
+          accept="image/*" // Accept only image files
+          onChange={(e) => handleImageUpload(e)}
+        />
+      </div>
       <ToastContainer closeOnClick />
     </div>
   );
