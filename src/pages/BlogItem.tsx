@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import remarkGfm from "remark-gfm";
 
 const BlogItem = () => {
-  const token = store.getState().auth.token;
+  const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch();
   const { blogid } = useParams();
   const [comment, setComment] = useState("");
@@ -24,17 +24,11 @@ const BlogItem = () => {
   const blog = useSelector((state: RootState) => state.blog.selectedBlog);
 
   async function handleUpvote(e: React.MouseEvent<HTMLDivElement>) {
-    const res = await Axios.post(
-      `Blog/like/${blog?.id}`,
-      { id: blog?.id },
-
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const res = await Axios.get(`Admin/Dashboard?Month=All`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     if (res.status == 200) {
       alert("Successfully Upvoted.");
     } else {

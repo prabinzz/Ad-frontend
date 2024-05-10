@@ -13,6 +13,7 @@ import AdminRoute from "./component/AdminRoute.tsx";
 import EmailInputComponent from "./component/EmailResetInput.tsx";
 import OTPVerificationComponent from "./component/OtpVerification.tsx";
 import PasswordResetComponent from "./component/PasswordReset.tsx";
+import UserProfile from "./component/profile/UserProfile.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<Index />} />
           <Route path="/blog/" element={<BlogItem />} />
           <Route path="/blog/:blogid" element={<BlogItem />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route
             path="/dashboard/:tab"
             element={
